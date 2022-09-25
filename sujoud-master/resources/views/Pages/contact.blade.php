@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="title">
                                             <span>Visit Our Store</span>
-                                            <p>88 broklyn street, New York</p>
+                                            <p>666 road, 30th street irbid</p>
                                         </div>
                                     </li>
 
@@ -188,7 +188,7 @@
                                         </div>
                                         <div class="title">
                                             <span>Send Email</span>
-                                            <p><a href="mailto:needhelp@company.com">needhelp@company.com</a></p>
+                                            <p><a href="mailto:needhelp@company.com">falahCompany@gmail.com</a></p>
                                         </div>
                                     </li>
 
@@ -198,7 +198,7 @@
                                         </div>
                                         <div class="title">
                                             <span>Call Anytime</span>
-                                            <p><a href="tel:123456789">666 888 0000</a></p>
+                                            <p><a href="tel:123456789">0779672445</a></p>
                                         </div>
                                     </li>
                                 </ul>
@@ -213,9 +213,11 @@
 
         <!--Contact Page Google Map Start-->
         <section class="contact-page-google-map">
-            <iframe
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.6374265876093!2d35.86270231477383!3d32.535829303551964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c76f344fa4c67%3A0x8f66171f036354d6!2sIrbid%20City%20Center!5e0!3m2!1sen!2sjo!4v1663598689805!5m2!1sen!2sjo"
+            class="contact-page-google-map__one" allowfullscreen></iframe>
+            {{-- <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4562.753041141002!2d-118.80123790098536!3d34.152323469614075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e82469c2162619%3A0xba03efb7998eef6d!2sCostco+Wholesale!5e0!3m2!1sbn!2sbd!4v1562518641290!5m2!1sbn!2sbd"
-                class="contact-page-google-map__one" allowfullscreen></iframe>
+                class="contact-page-google-map__one" allowfullscreen></iframe> --}}
         </section>
         <!--Contact Page Google Map End-->
 

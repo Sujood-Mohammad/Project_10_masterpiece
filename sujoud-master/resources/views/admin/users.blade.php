@@ -49,14 +49,14 @@ $pageName = 'Manage Users';
                                     <td>@if ($user->roles == 0)User @else Admin @endif</td>
                                     <td>
                                         <a href="{{ route('admin.users.show', $user->id) }}"><i
-                                                class="far fa-eye"></i></a>
+                                                class="far fa-eye" style="color:#6b9818"></i></a>
                                         <a href="{{ route('admin.users.edit', $user->id) }}" class="ms-3 "><i
-                                                class="fas fa-user-edit"></i></a>
+                                                class="fas fa-user-edit" style="color:#6b9818"></i></a>
                                         <form style="display: inline-block" method="POST"
                                             action="{{ route('admin.users.destroy', $user->id) }}">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn text-primary"><i class="far fa-trash-alt"></i></button>
+                                            <button class="btn text-primary"><i class="far fa-trash-alt" style="color:#6b9818"></i></button>
                                         </form>
                                     </td>
                                 </tr>

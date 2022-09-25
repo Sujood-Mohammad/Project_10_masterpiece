@@ -87,73 +87,6 @@
         </section>
         <!--About Three End-->
 
-
-        <!--Company Logos One Start-->
-        <section class="company-logos-one">
-            <div class="container">
-                <div class="thm-swiper__slider swiper-container" data-swiper-options='{"spaceBetween": 100, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
-                "0": {
-                    "spaceBetween": 20,
-                    "slidesPerView": 2
-                },
-                "375": {
-                    "spaceBetween": 20,
-                    "slidesPerView": 2
-                },
-                "575": {
-                    "spaceBetween": 20,
-                    "slidesPerView": 3
-                },
-                "767": {
-                    "spaceBetween": 30,
-                    "slidesPerView": 4
-                },
-                "991": {
-                    "spaceBetween": 40,
-                    "slidesPerView": 5
-                },
-                "1199": {
-                    "spaceBetween": 40,
-                    "slidesPerView": 5
-                }
-            }}'>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/resources/Company-Logos-v1-logo1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--Company Logos One End-->
-
         <!--Video One Start-->
         <section class="video-one jarallax clearfix" data-jarallax data-speed="0.2" data-imgPosition="50% 0%"
             style="background-image: url(assets/images/backgrounds/video-one-bg.jpg);">
@@ -178,7 +111,7 @@
                             <div class="video-one__right">
                                 <div class="icon wow zoomIn" data-wow-delay="300ms" data-wow-duration="1500ms">
                                     <a class="video-popup" title=" Video"
-                                        href="https://www.youtube.com/watch?v=8DP4NgupAhI">
+                                        href="https://www.youtube.com/watch?v=S_4qimUqpgo">
                                         <span class="icon-play-button-1"></span>
                                     </a>
                                     <span class="border-animation border-1"></span>
@@ -224,61 +157,19 @@
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="testimonials-one__carousel owl-carousel owl-theme">
-                                        <!--Start Single Testimonials One-->
-                                        <div class="testimonials-one__single">
-                                            <p class="testimonials-one__single-text">Lorem ipsum is simply free text
-                                                dolor not sit amet, consectetur notted adipisicing elit sed do eiusmod
-                                                tempor incididunt ut labore et dolore text.</p>
-                                            <div class="testimonials-one__single-client-info">
-                                                <div class="testimonials-one__single-client-info-img">
-                                                    <div class="testimonials-one__single-client-info-img-inner">
-                                                        <img src="assets/images/testimonial/testimonials-v1-img1.jpg"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="icon">
-                                                        <span class="icon-right-quotation-mark"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="testimonials-one__single-client-info-title">
-                                                    <h4>Kevin Martin</h4>
-                                                    <p>Customer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Start Single Testimonials One-->
 
-                                        <!--Start Single Testimonials One-->
-                                        <div class="testimonials-one__single">
-                                            <p class="testimonials-one__single-text">Lorem ipsum is simply free text
-                                                dolor not sit amet, consectetur notted adipisicing elit sed do eiusmod
-                                                tempor incididunt ut labore et dolore text.</p>
-                                            <div class="testimonials-one__single-client-info">
-                                                <div class="testimonials-one__single-client-info-img">
-                                                    <div class="testimonials-one__single-client-info-img-inner">
-                                                        <img src="assets/images/testimonial/testimonials-v1-img2.jpg"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="icon">
-                                                        <span class="icon-right-quotation-mark"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="testimonials-one__single-client-info-title">
-                                                    <h4>Christine Eve</h4>
-                                                    <p>Customer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Start Single Testimonials One-->
 
+                                        @foreach ($comm as $comment)
+                                        @if ($comment->status == '1')
                                         <!--Start Single Testimonials One-->
                                         <div class="testimonials-one__single">
-                                            <p class="testimonials-one__single-text">Lorem ipsum is simply free text
-                                                dolor not sit amet, consectetur notted adipisicing elit sed do eiusmod
-                                                tempor incididunt ut labore et dolore text.</p>
+                                            <p class="testimonials-one__single-text">
+                                                {{ $comment->text }}
+                                            </p>
                                             <div class="testimonials-one__single-client-info">
                                                 <div class="testimonials-one__single-client-info-img">
                                                     <div class="testimonials-one__single-client-info-img-inner">
-                                                        <img src="assets/images/testimonial/testimonials-v1-img1.jpg"
+                                                        <img src="{{url('img/'. $comment->user->image ) }}"
                                                             alt="" />
                                                     </div>
                                                     <div class="icon">
@@ -286,81 +177,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="testimonials-one__single-client-info-title">
-                                                    <h4>Kevin Martin</h4>
-                                                    <p>Customer</p>
+                                                    <h4>
+                                                        {{ $comment->user->name }}
+                                                    </h4>
+                                                    <p>
+                                                        {{$comment->created_at}}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--Start Single Testimonials One-->
+                                        @endif
+                                        @endforeach
 
-                                        <!--Start Single Testimonials One-->
-                                        <div class="testimonials-one__single">
-                                            <p class="testimonials-one__single-text">Lorem ipsum is simply free text
-                                                dolor not sit amet, consectetur notted adipisicing elit sed do eiusmod
-                                                tempor incididunt ut labore et dolore text.</p>
-                                            <div class="testimonials-one__single-client-info">
-                                                <div class="testimonials-one__single-client-info-img">
-                                                    <div class="testimonials-one__single-client-info-img-inner">
-                                                        <img src="assets/images/testimonial/testimonials-v1-img2.jpg"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="icon">
-                                                        <span class="icon-right-quotation-mark"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="testimonials-one__single-client-info-title">
-                                                    <h4>Christine Eve</h4>
-                                                    <p>Customer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Start Single Testimonials One-->
 
-                                        <!--Start Single Testimonials One-->
-                                        <div class="testimonials-one__single">
-                                            <p class="testimonials-one__single-text">Lorem ipsum is simply free text
-                                                dolor not sit amet, consectetur notted adipisicing elit sed do eiusmod
-                                                tempor incididunt ut labore et dolore text.</p>
-                                            <div class="testimonials-one__single-client-info">
-                                                <div class="testimonials-one__single-client-info-img">
-                                                    <div class="testimonials-one__single-client-info-img-inner">
-                                                        <img src="assets/images/testimonial/testimonials-v1-img1.jpg"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="icon">
-                                                        <span class="icon-right-quotation-mark"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="testimonials-one__single-client-info-title">
-                                                    <h4>Kevin Martin</h4>
-                                                    <p>Customer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Start Single Testimonials One-->
-
-                                        <!--Start Single Testimonials One-->
-                                        <div class="testimonials-one__single">
-                                            <p class="testimonials-one__single-text">Lorem ipsum is simply free text
-                                                dolor not sit amet, consectetur notted adipisicing elit sed do eiusmod
-                                                tempor incididunt ut labore et dolore text.</p>
-                                            <div class="testimonials-one__single-client-info">
-                                                <div class="testimonials-one__single-client-info-img">
-                                                    <div class="testimonials-one__single-client-info-img-inner">
-                                                        <img src="assets/images/testimonial/testimonials-v1-img2.jpg"
-                                                            alt="" />
-                                                    </div>
-                                                    <div class="icon">
-                                                        <span class="icon-right-quotation-mark"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="testimonials-one__single-client-info-title">
-                                                    <h4>Christine Eve</h4>
-                                                    <p>Customer</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Start Single Testimonials One-->
                                     </div>
                                 </div>
                             </div>

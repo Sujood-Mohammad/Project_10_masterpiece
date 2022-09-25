@@ -124,7 +124,6 @@
                         <div class="col-md-4">
                             <div class="profile-img">
                                 <img style="width: 250px; height: 250px ;  border-radius:50%;" src="{{url('img/'.$user->image) }}" alt=""/>
-
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -137,7 +136,7 @@
                                         <a class="nav-link active size" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">MY INFO</a>
                                         <a href="/order/{{auth()->user()->id}}"  class="thm-btn">Orders</a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         </div>

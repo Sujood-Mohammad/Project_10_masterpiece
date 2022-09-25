@@ -27,8 +27,12 @@
                 <div class="ms-4">
                     <div class="d-flex justify-content-between">
                         <div class="logo pt-5 ps-3">
-                            <a href="index.html"><img src="{{ asset('img/logo.png') }}" width="124" height="44"
-                                    alt="Logo" srcset=""></a>
+                            <a href="/">
+                                {{-- <img src="{{ asset('img/logo.png') }}" width="124" height="44"
+                                    alt="Logo" srcset=""> --}}
+                                     <img src="{{asset('assets/images/resources/falahD.png')}}" width="115px" height="54" alt="" class="light-logo" />
+                                     {{-- <img src="{{asset('assets/images/resources/falahW.png')}}" width="115px" height="54" class="dark-logo" alt="" /> --}}
+                                </a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -63,12 +67,38 @@
                                 <span>Products</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+
+                         <li class="sidebar-item @if ($pageName == 'Manage Coupons') active @endif">
+                            <a href="/admin/coupons" class='sidebar-link'>
+                                <i class="fas fa-book"></i>
+                                <span>Coupons</span>
+                            </a>
+                        </li>
+
+                          <li class="sidebar-item @if ($pageName == 'Manage Orders') active @endif">
+                            <a href="{{ route('admin.orders.create') }}" class='sidebar-link'>
+                                <i class="fas fa-book"></i>
+                                <span>Orders</span>
+                            </a>
+                        </li>
+
+
+
+                         <li class="sidebar-item @if ($pageName == 'Manage Comments') active @endif">
+                            <a href="/admin/comments" class='sidebar-link'>
+                                <i class="fas fa-book"></i>
+                                <span>Comments</span>
+                            </a>
+
+                        </li>
+
+
+                        {{-- <li class="sidebar-item">
                             <a href="/dashboard" class='sidebar-link'>
                                 <i class="fas fa-clipboard-list"></i>
                                 <span>Dashboard</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();                                                                                                   document.getElementById('logout-form').submit();">

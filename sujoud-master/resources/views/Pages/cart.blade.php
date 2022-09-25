@@ -3,10 +3,13 @@
 
 @section('content')
 
+
     <!--Page Header Start-->
     <section class="page-header clearfix"
         style="background-image: url('{{ asset('assets/images/backgrounds/page-header-bg.jpg') }}');">
         <div class="container">
+
+
             <div class="page-header__inner text-center clearfix">
                 <ul class="thm-breadcrumb">
                     <li><a href="index-main.html">Home</a></li>
@@ -21,7 +24,18 @@
 
 
     <section class="cart-table">
+
         <div class="container">
+             @if (session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
             <table>
                 <thead>
                     <tr>
@@ -33,13 +47,15 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php
                         $total = 0;
                         $sub_total = 0;
                         $shiping_cost = 20;
                          ?>
+                           @if (Auth::check())
                     @foreach ($cart as $id => $details)
-                        {{-- dd($details); --}}
+
                         <?php
                         $sub_total += $details->product->product_price * $details->product_quntity;
                         $total = $sub_total + $shiping_cost;
@@ -78,8 +94,6 @@
                   <?php
                     $sub_total += $details->product->product_price * $details->product_quntity;
                     $total = $sub_total + $shiping_cost;
-
-
                             ?>
 
 
@@ -111,17 +125,9 @@
                 <button type="submit" class="btn btn-danger">Remove</button>
             </td>
         </form>
-        {{-- <form style="display: inline-block" method="POST"
->>>>>>> 86bc5c1037e9c8d152212ad45e6f86a09bc6d876
-                                            action="{{ route('admin.categories.destroy', $category->id) }}">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn text-primary"><i class="far fa-trash-alt"></i></button>
-                                        </form> --}}
-
-        {{-- <td data-label="Remove"><span class="cart-table__close"></span></td> --}}
         </tr>
         @endforeach
+        @endif
         </tbody>
         </table>
         </div><!-- /.container -->
@@ -132,13 +138,21 @@
         <div class="container">
             <div class="row">
 
+
+            {{-- <form action="{{ route('applay')}}" method="POST" style="display: inline-block">
+                @csrf
+                @method('POST')
                 <div class="col-lg-8">
                     <div class="proceed-to-checkout__cupon">
-                        <input type="text" placeholder="Enter Coupon Code">
+                        <input type="text" placeholder="Enter Coupon Code" name="coupon_code">
                         <button type="submit" class="thm-btn">Apply coupon</button><!-- /.thm-btn -->
+
                     </div><!-- /.proceed-to-checkout__cupon -->
                 </div><!-- /.col-lg-8 -->
-                <div class="col-lg-4">
+            </form> --}}
+
+
+                <div class="col-lg-4" style="margin-left: auto" >
                     <ul class="list-unstyled proceed-to-checkout__list">
                         <li>
                             <span>Subtotal</span>

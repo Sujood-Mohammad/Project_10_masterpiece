@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Traits\GlobalTrait;
 
 class HomeController extends Controller
 {
@@ -11,9 +14,14 @@ class HomeController extends Controller
      *
      * @return void
      */
+    // use GlobalTrait;
+    // public $carts;
+
     public function __construct()
     {
         // $this->middleware('auth');
+     
+
     }
 
     /**
@@ -23,7 +31,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // return view('home');
 
         $data = Category::all();
         return view("Pages.index", compact("data"));

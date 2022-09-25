@@ -19,15 +19,21 @@
         </div>
     </section>
     <!--Page Header End-->
-
+    <div class="container" style="margin-top: 20px">
+        @if (Session::has('success'))
+            <div class="alert alert-success text-center" role="alert">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+    </div>
 
     <section class="checkout-page">
         {{-- @foreach ($order as $id => $orders) --}}
-        @if($errors->any())
-    <div class="alert alert-danger text-center" role="alert">
-        {{ $errors->first() }}
-    </div>
-@endif
+        @if ($errors->any())
+            <div class="alert alert-danger text-center" role="alert">
+                {{ $errors->first() }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('order.store') }}">
             @csrf
             {{-- @method('post') --}}
@@ -40,9 +46,9 @@
                         <div class="comment-one__form">
                             <div class="row">
 
-                              <div class="col-md-12">
+                                <div class="col-md-12">
                                     <div class="comment-form__input-box">
-                                        <input type="text" placeholder="Full Name" value="{{Auth::user()->name}}">
+                                        <input type="text" placeholder="Full Name" value="{{ Auth::user()->name }}">
                                     </div><!-- /.comment-form__input-box -->
                                 </div><!-- /.col-md-12 -->
 
@@ -69,7 +75,7 @@
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <div class="comment-form__input-box">
-                                        <input type="text" placeholder="Email Address" value="{{Auth::user()->email}}">
+                                        <input type="text" placeholder="Email Address" value="{{ Auth::user()->email }}">
                                     </div><!-- /.comment-form__input-box -->
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
@@ -88,49 +94,59 @@
 
                         <div class="comment-one__form">
                             <div class="row">
-                            <div class="table-responsive">
-                                <table class="table checkout__table">
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <div class="table-responsive">
+                                    <table class="table checkout__table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>${{$total}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div><!-- /.table-responsive -->
+                                            <tr>
+                                                <td>Total</td>
+                                                <td>${{ $total }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.table-responsive -->
 
-                                 <div class="checkout__payment">
-                            <div class="checkout__payment__item checkout__payment__item--active">
-                                <h3 class="checkout__payment__title">Payment when recieving</h3>
-                                <div class="checkout__payment__content">
-                                    Make your payment directly into our bank account.
-                                </div><!-- /.checkout__payment__content -->
-                            </div><!-- /.checkout__payment__item -->
-                        <div class="text-right d-flex justify-content-end">
+                                <div class="checkout__payment">
+                                    <div class="checkout__payment__item checkout__payment__item--active">
+                                        <h3 class="checkout__payment__title">Payment when recieving</h3>
+                                        <div class="checkout__payment__content">
+                                            Make your payment directly into our bank account.
+                                        </div><!-- /.checkout__payment__content -->
+                                    </div><!-- /.checkout__payment__item -->
+                                    <div class="text-right d-flex justify-content-end">
 
-                            {{-- <a class="thm-btn" href="checkout.html">
+                                        {{-- <a class="thm-btn" href="checkout.html">
 								Place your order
 							</a> --}}
-                            <button type="submit" class="thm-btn"> Place your order</button>
-                        </div><!-- /.text-right -->
+                                        <button type="submit" class="thm-btn"> Place your order </button>
+                                    </div><!-- /.text-right -->
 
-                    </div><!-- /.col-lg-6 -->
+                                </div><!-- /.col-lg-6 -->
 
-                        </div>
+                            </div>
 
                         </div>
                     </div><!-- /.col-lg-6 -->
 
                 </div><!-- /.row -->
         </form>
-        {{-- @endforeach --}}
+        <form action="{{ route('applay') }}" method="POST" style="display: inline-block">
+            @csrf
+            @method('POST')
+            <div class="col-lg-8">
+                <div class="proceed-to-checkout__cupon">
+                    <input type="text" placeholder="Enter Coupon Code" name="coupon_code">
+                    <button type="submit" class="thm-btn">Apply coupon</button><!-- /.thm-btn -->
+
+                </div><!-- /.proceed-to-checkout__cupon -->
+            </div><!-- /.col-lg-8 -->
+        </form>
     </section><!-- /.checkout-page -->
 
 @endsection

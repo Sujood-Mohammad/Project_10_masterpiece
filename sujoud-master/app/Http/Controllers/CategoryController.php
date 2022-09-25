@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
@@ -15,8 +17,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $total_quntity = 0;
+        if (Auth::user()) {
+            $total_quntity = Cart::where('user_id', auth()->user()->id)->sum('product_quntity');
+        }
         $categories = Category::all();
-        return view('admin.categories', compact('categories'));
+        return view('admin.categories', compact('categories', 'total_quntity'));
     }
 
     /**
@@ -29,7 +35,7 @@ class CategoryController extends Controller
         return view('admin.category_create');
     }
 
- 
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +68,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show()
     {
        //
     }

@@ -2,13 +2,30 @@
 @php $title = "Register"; @endphp
 @section('title', $title)
 @section('content')
-<img style='width: 100%; position:absolute; ' src="assets/images/bgimage.jpg" alt="">
+
+{{-- <img style='width: 100%; position:absolute; ' src="assets/images/bgimage.jpg" alt=""> --}}
+       <!--Page Header Start-->
+        <section class="page-header clearfix"
+            style="background-image: url(assets/images/backgrounds/page-header-bg.jpg);">
+            <div class="container">
+                <div class="page-header__inner text-center clearfix">
+                    <ul class="thm-breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li>
+                            Register
+                        </li>
+                    </ul>
+                    <h2>Register</h2>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End-->
     <section class="Login">
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-8 col-sm-10">
                     <div class="card mb-5">
-                        <div class="login-card-header mt-3">{{ __('Sign Up and Start Learning!') }}</div>
+                        <div class="login-card-header mt-3">{{ __('Register Right Now') }}</div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
@@ -67,7 +84,7 @@
                                 </div>
                             </form>
                             <div class="mt-4">
-                                <span>Already have an account? <a class="ms-1 regster-href" href="login.html">Login</a>
+                                <span>Already have an account? <a class="ms-1 regster-href" href="/login">Login</a>
                                 </span>
                             </div>
                         </div>

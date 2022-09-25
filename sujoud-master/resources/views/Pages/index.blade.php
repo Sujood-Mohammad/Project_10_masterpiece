@@ -38,7 +38,7 @@
                                                 </h2>
                                         </div>
                                         <div class="main-slider__button-box">
-                                            <a href="#" class="thm-btn">Discover more</a>
+                                            <a href="product?category=2" class="thm-btn">Discover more</a>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                                 </h2>
                                         </div>
                                         <div class="main-slider__button-box">
-                                            <a href="#" class="thm-btn">Discover more</a>
+                                            <a href="product?category=3" class="thm-btn">Discover more</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                                 </h2>
                                         </div>
                                         <div class="main-slider__button-box">
-                                            <a href="#" class="thm-btn">Discover more</a>
+                                            <a href="product?category=1" class="thm-btn">Discover more</a>
                                         </div>
                                     </div>
                                 </div>
@@ -227,15 +227,21 @@
                         data-wow-duration="1000ms">
                         <div class="services-one__single">
                             <div class="services-one__single-img">
-                                <div class="services-one__single-img-inner">
-                                    <img src="{{ asset('img/'.$values->image)}}" alt="" style="height: 330px"/>
-                                </div>
+
+                                   <a href="product?category={{$values->id}}">
+                                     <div class="services-one__single-img-inner">
+                                <img src="{{ asset('img/'.$values->image)}}" alt="" style="height: 330px"/>
+                            </div>
+                                   </a>
+
                                 <div class="services-one__single-img-icon">
                                     <span class="icon-agriculture"></span>
                                 </div>
                             </div>
                             <div class="services-one__single-content text-center">
-                                <h3><a href="services-details.html">{{$values->name}}</a></h3>
+                                <h3>
+                            <a href="product?category={{$values->id}}">{{$values->name}}</a>
+                                </h3>
                               <p>{{$values->description}}</p>
                                 <a href="product?category={{$values->id}}" class="read-more-btn"><span
                                         class="icon-right-arrow-2"></span></a>
@@ -830,34 +836,34 @@
             }}'>
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s1.jpg')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s2.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s3.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s4.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s5.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s6.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s1.jpg')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s2.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s3.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                         <div class="swiper-slide">
-                            <img src="{{ asset('assets/images/resources/Company-Logos-v1-logo1.png')}}" alt="">
+                            <img style="height: 200px; width:200px;" src="{{ asset('assets/assets2/images/s4.png')}}" alt="">
                         </div><!-- /.swiper-slide -->
                     </div>
                 </div>

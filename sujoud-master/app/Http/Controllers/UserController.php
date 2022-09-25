@@ -150,7 +150,7 @@ class UserController extends Controller
 
 
     //profile
-    
+
     public function showProfile($id)
     {
         $user = User::findOrFail($id);
@@ -207,5 +207,7 @@ class UserController extends Controller
             return redirect("profile/$id")->with('success', 'Updated successfully');
 
         }
+
+        
     }
 }

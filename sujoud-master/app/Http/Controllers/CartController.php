@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -17,21 +18,29 @@ class CartController extends Controller
      */
     public function index()
     {
+        if (Auth::user())
+{
+            $cart = Cart::where('user_id', auth()->user()->id)->get();
+            foreach ($cart as $key => $value) {
+                $value->product = Product::find($value->product_id);
+            }
 
-        $cart = Cart::where('user_id', auth()->user()->id)->get();
-        foreach ($cart as $key => $value) {
-            $value->product = Product::find($value->product_id);
+            $total = 0;
+            $sub_total = 0;
+            $shiping_cost = 20;
+            foreach ($cart as $key => $value) {
+                $sub_total += $value->product->product_price * $value->product_quntity;
+                $total = $sub_total + $shiping_cost;
+            }
+            
+            $total_quntity = Cart::where('user_id', auth()->user()->id)->sum('product_quntity');
+
+            return view('pages.cart', compact('cart', 'total', 'sub_total', 'shiping_cost', 'total_quntity'));
+}
+        else{
+            return view('pages.cart');
         }
 
-        $total = 0;
-        $sub_total = 0;
-        $shiping_cost = 20;
-        foreach ($cart as $key => $value) {
-            $sub_total += $value->product->product_price * $value->product_quntity;
-            $total = $sub_total + $shiping_cost;
-
-        }
-        return view('pages.cart', compact('cart', 'total', 'sub_total', 'shiping_cost'));
     }
 
     /**
@@ -55,6 +64,8 @@ class CartController extends Controller
         $request->validate([
             'product_id' => 'required',
             'product_quntity' => 'required',
+
+
         ]);
 
         $product = Product::find($request->input('product_id'));
@@ -66,6 +77,8 @@ class CartController extends Controller
             'shiping_cost' => 20,
             'total' => $request->product_price * $request->input('product_quntity') + 20,
         ]);
+
+
 
         return redirect()->back()->with('success', 'Product added to cart successfully');
     }
@@ -118,6 +131,7 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
+
 
 
     public function destroy($id)

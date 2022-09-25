@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -15,7 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('admin.comments', compact('comments'));
     }
 
     /**
@@ -25,7 +26,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,9 +35,29 @@ class CommentController extends Controller
      * @param  \App\Http\Requests\StoreCommentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCommentRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'text' => 'required',
+            'status' => 'required',
+
+        ]);
+
+        $comments = Comment::where('user_id', '=', auth()->user()->id)->where('product_id', '=', $request->product_id)->get();
+        if (count($comments) > 0) {
+            return redirect()->back()->with('fail', 'You have already commented on this product');
+        }
+        else
+         {
+            $comment = Comment::create([
+                'text' => $request->input('text'),
+                'user_id' => auth()->user()->id,
+                'product_id' => $request->product_id,
+            ]);
+
+            return redirect()->back()->with('success', 'Comment created successfully.');
+        }
+
     }
 
     /**
@@ -45,10 +66,17 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Request $request)
     {
-        //
+        // $product_id = (int)$request->query('product_id');
+        // if ($product_id) {
+        //     $comments = Comment::where('product_id', $product_id)->get();
+        // } else {
+        //     $comments = Comment::all();
+        // }
+        // return view('Pages.product-details', compact('comments'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -59,6 +87,7 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         //
+
     }
 
     /**
@@ -68,10 +97,24 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            // 'text' => 'required',
+            'status' => 'required',
+
+        ]);
+
+        $comment = Comment::find($id);
+        // $comment->text = $request->input('text');
+        $comment->status = $request->input('status');
+        $comment->save();
+        return redirect('admin/comments')->with('success', 'Updated successfully');
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -81,6 +124,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
     }
 }

@@ -4,6 +4,7 @@
 
 @section('content')
 
+
     <!--Page Header Start-->
     <section class="page-header clearfix"
         style="background-image: url('{{ asset('assets/images/backgrounds/page-header-bg.jpg') }}');">
@@ -18,15 +19,31 @@
         </div>
     </section>
     <!--Page Header End-->
+    <div class="container" style="margin-top: 20px">
+           @if (Session::has('success'))
+    <div class="alert alert-success text-center" role="alert">
+        {{ Session::get('success') }}
+    </div>
+@endif
+
+@if (Session::has('fail'))
+    <div class="alert alert-danger text-center" role="alert">
+        {{ Session::get('fail') }}
+    </div>
+@endif
+    </div>
 
     <section class="shop-one">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="shop-one__sidebar">
                         <div class="shop-one__sidebar__item shop-one__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search here">
+
+                            <form action="{{route('product.search')}}" method="POST">
+                                @csrf
+                                <input type="text" placeholder="Search here" name="search">
                                 <button type="submit"><i class=" icon-search "></i></button>
                             </form>
 
@@ -34,6 +51,7 @@
                         <div class="shop-one__sidebar__item shop-one__sidebar__price">
                             <h3 class="shop-one__sidebar__item__title">Price</h3>
                             <!-- /.shop-one__sidebar__item__title -->
+                             <form method="GET">
                             <div class="shop-one__sidebar__price-range">
                                 <div class="range-slider-price" data-range-min="10" data-range-max="200" data-limit="200"
                                     data-start-min="30" data-start-max="150" id="range-slider-price"></div>
@@ -44,23 +62,28 @@
                                         <p>$<span id="max-value-rangeslider"></span></p>
                                     </div><!-- /.left -->
                                     <div class="right">
-                                        <button class="thm-btn">
+                                        <button class="thm-btn" type="submit">
                                             Filter
                                         </button>
                                     </div><!-- /.right -->
                                 </div>
                             </div>
+                        </form>
                         </div><!-- /.shop-one__sidebar__item -->
                         <div class="shop-one__sidebar__item shop-one__sidebar__category">
-                            <h3 class="shop-one__sidebar__item__title">Categories</h3>
+                            <h3 class="shop-one__sidebar__item__title">Main Categories</h3>
                             <!-- /.shop-one__sidebar__item__title -->
                             <ul class="list-unstyled shop-one__sidebar__category__list">
-                                <li><a href="#">Agriculture</a></li>
-                                <li><a href="#">Dairy Farm</a></li>
-                                <li><a href="#">Economy Solution</a></li>
-                                <li><a href="#">Harvests Innovations</a></li>
-                                <li><a href="#">Organic Food</a></li>
-                                <li><a href="#">Fresh Vegetables</a></li>
+                               <?php
+                                $categories = DB::table('categories')->get();
+
+                               ?>
+                               @foreach($categories as $category)
+                                  <li>
+                                    <a href="product?category={{$category->id}}">{{$category->name}}</a>
+                                    <hr>
+                                </li>
+                                 @endforeach
                             </ul>
                         </div><!-- /.shop-one__sidebar__item -->
                     </div><!-- /.shop-one__sidebar -->
@@ -68,15 +91,42 @@
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-12 shop-one__sorter">
-                            <p class="shop-one__product-count">Showing 1–9 of 12 results</p>
-                            <select class="shop-one__product-sorter" name="" id="">
-                                <option value="">Sort by Popular</option>
-                                <option value="">Sort by Popular</option>
-                                <option value="">Sort by Popular</option>
-                            </select>
+                            <p class="shop-one__product-count">
+                                {{-- Showing pangment of all number of product results --}}
+
+                                {{-- @if($products->count() > 0)
+                                Showing {{$products->count()}} of results {{$products->count()}}
+                                @else
+                                Showing 0 of 0 results
+                                @endif --}}
+                            </p><!-- /.shop-one__product-count -->
+
+                            {{-- how to create form to get show functoin to sort product --}}
+                            <form method="GET">
+                                <select class="shop-one__product-sorter" name="sort" id="sort" onchange="this.form.submit()">
+                                    <option value="">Select Sorting</option>
+                                    <option value="low_price">
+                                        <a href="product?sort=low_price">Sort by Low Price</a>
+                                    </option>
+                                    <option value="high_price">
+                                        <a href="product?sort=high_price">Sort by High Price</a>
+                                    </option>
+                                    <option value="new">
+                                        <a href="product?sort=new">Sort by Newest</a>
+                                    </option>
+                                    <option value="old">
+                                        <a href="product?sort=old">Sort by Oldest</a>
+                                    </option>
+                                </select>
+                                {{-- <button type="submit" class="thm-btn">Sort</button> --}}
+                            </form>
+
+
+
                         </div><!-- /.col-lg-12 -->
                     </div><!-- /.row -->
                     <div class="row">
+                        @if (!empty($products) && $products->count())
                         @foreach ($products as $values)
                             {{-- <form method="POST" action="{{ route('cart.store') }}">
                                 @csrf --}}
@@ -85,7 +135,9 @@
                                 <div class="shop-one__item">
                                     <div class="shop-one__image" style="background-color:#304332">
                                         <span class="shop-one__sale">sale</span><!-- /.shop-one__sale -->
+                                        <a href="{{ url('productdetails/' . $values->id) }}">
                                         <img src="{{ asset('img/' . $values->product_image) }}" height="300px" alt="">
+                                        </a>
                                         {{-- <a class="shop-one__cart" href="/carts/store"><i
 												class=" icon-shopping-cart"></i></a> --}}
                                         <button type="submit" class="shop-one__cart">
@@ -102,21 +154,45 @@
                                         <h3 class="shop-one__title"><a
                                                 href="{{ url('productdetails/' . $values->id) }}">{{ $values->product_name }}</a>
                                         </h3>
-                                        <p>{{ $values->product_description }}</p>
-                                        <p class="shop-one__price">{{ $values->product_price }}</p>
+                            {{-- display discribtion 17 letter --}}
+                                                                    {{-- <p>{{ $values->product_description }}</p> --}}
+
+                            <p >{{ Str::limit($values->product_description, 40) }}</p>
+                                        <p class="shop-one__price">{{ $values->product_price }} $</p>
                                         <!-- /.shop-one__price -->
                                         <div class="shop-one__rating">
+                                            {{-- <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i> --}}
+                                            <button class="thm-btn" style="padding: 10px 50px">
+                                                Add to cart
+                                            </button>
                                         </div><!-- /.shop-one__rating -->
                                     </div><!-- /.shop-one__content -->
                                 </div><!-- /.shop-one__item -->
 
                             </form>
+
                         @endforeach
+
+                            {{-- {{ $products->links() }} --}}
+
+                        @else
+                        <div class="col-md-12">
+                            <div class="alert alert-danger">
+                                <p>There are no products</p>
+                            </div>
+                        </div>
+                        @endif
+
+{{-- <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px">
+    {{ $products->links() }}
+</div> --}}
+
+
+
                         {{-- <div class="col-md-6 col-lg-4">
 								<div class="shop-one__item">
 									<div class="shop-one__image" style="background-color:#304332">
@@ -290,11 +366,13 @@
 
                     </div><!-- /.row -->
                     </form>
+
                 </div><!-- /.col-lg-3 -->
             </div><!-- /.row -->
         </div>
 
-    </section><!-- /.shop-one -->
 
+
+    </section><!-- /.shop-one -->
 
 @endsection

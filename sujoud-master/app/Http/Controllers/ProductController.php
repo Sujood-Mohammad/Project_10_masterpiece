@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -38,8 +40,10 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+
     {
-        return view('admin.product_create');
+        $categories = Category::all();
+        return view('admin.product_create', compact('categories'));
     }
 
     /**
@@ -53,21 +57,24 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => 'required',
             'product_description' => 'required',
-            'product_image' => 'mimes:jpg,png,jpeg|max:5048|required',
+            'product_image' => 'max:5048|required',
             'product_price' => 'required',
+            'category_id' => 'required',
         ]);
 
         $newImageName = time() . '-' . $request->product_name . '.' . $request->product_image->extension();
         $request->product_image->move(public_path('img'), $newImageName);
-
         $product = Product::create([
             'product_name' => $request->input('product_name'),
             'product_description' => $request->input('product_description'),
             'product_image' => $newImageName,
             'product_price' => $request->input('product_price'),
+            'category_id' => $request->input('category_id'),
+
         ]);
         return redirect('admin/products')->with('success', 'Added successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -78,12 +85,35 @@ class ProductController extends Controller
     public function show(Request $request)
     {
         $category = (int)$request->query('category');
+        $sort = $request->query('sort');
+        $rang_price = $request->query('rang_price');
+        $min_price = $request->query('min_price');
+        $max_price = $request->query('max_price');
         if ($category) {
             $products = Product::where('category_id', $category)->get();
-        } else {
+        } else if ($sort == 'low_price') {
+            $products = Product::orderBy('product_price', 'asc')->get();
+        } else if ($sort == 'high_price') {
+            $products = Product::orderBy('product_price', 'desc')->get();
+        } else if ($sort == 'new') {
+            $products = Product::orderBy('created_at', 'desc')->get();
+        } else if ($sort == 'old') {
+            $products = Product::orderBy('created_at', 'asc')->get();
+        } else if ($rang_price) {
+            $products = Product::whereBetween('product_price', [$min_price, $max_price])->get();
+        }
+        else {
             $products = Product::all();
         }
-        return view('Pages.shop', compact('products'));
+        return view('Pages.shop', compact('products', 'sort', 'rang_price', 'min_price', 'max_price'));
+
+        // $category = (int)$request->query('category');
+        // if ($category) {
+        //     $products = Product::where('category_id', $category)->get();
+        // } else {
+        //     $products = Product::paginate(9);
+        // }
+        // return view('Pages.shop', compact('products'));
     }
 
     /**
@@ -112,8 +142,9 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => 'required',
             'product_description' => 'required',
-            'product_image' => 'mimes:jpg,png,jpeg|max:5048|required',
+            'product_image' => 'max:5048|required',
             'product_price' => 'required',
+            // 'category_id' => 'required',
         ]);
 
         $newImageName = time() . '-' . $request->product_name . '.' . $request->product_image->extension();
@@ -124,6 +155,7 @@ class ProductController extends Controller
             'product_description' => $request->input('product_description'),
             'product_image' => $newImageName,
             'product_price' => $request->input('product_price'),
+            // 'category_id' => $request->input('category_id'),
         ]);
 
         return redirect('admin/products')->with('success', 'Updated successfully');
@@ -146,9 +178,26 @@ class ProductController extends Controller
     {
         if (Product::where('id', $product_id)->exists()) {
             $products = Product::where('id', $product_id)->first();
-            return view('Pages.product-details', compact('products'));
+            $comments = Comment::where('product_id', $product_id)->get();
+            $users = User::where('id', $products->user_id)->first();
+            return view('Pages.product-details', compact('products','comments','users'));
         } else {
             return redirect('/')->with('error', 'Product not found');
         }
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $products = Product::query()
+            ->where('product_name', 'LIKE', "%{$search}%")
+            ->get();
+        if ($products->count() > 0) {
+            return view('Pages.shop', compact('products', 'search'));
+        } else {
+            return redirect()->back()->with('fail', ' No Product Found ');
+        }
+
+    }
+
 }

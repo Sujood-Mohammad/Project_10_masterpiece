@@ -56,15 +56,15 @@ $pageName = 'Manage Products';
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.products.show', $product->id) }}"><i
-                                                class="far fa-eye"></i></a>
+                                                class="far fa-eye" style="color:#6b9818"></i></a>
                                         <a href="{{ route('admin.products.edit', $product->id) }}" class="ms-3 ">
-                                            <i class="fas fa-cog"></i>
+                                            <i class="fas fa-cog" style="color:#6b9818"></i>
                                         </a>
                                         <form style="display: inline-block" method="POST"
                                             action="{{ route('admin.products.destroy', $product->id) }}">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn text-primary"><i class="far fa-trash-alt"></i></button>
+                                            <button class="btn text-primary"><i class="far fa-trash-alt" style="color:#6b9818"></i></button>
                                         </form>
                                     </td>
                                 </tr>

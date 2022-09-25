@@ -9,7 +9,7 @@ use Mail;
 class ContactController extends Controller
 {
     public function index(){
-        return view('pages.contact');
+        return view('pages.contact', compact('massege'));
     }
 
     public function save(Request $request)
@@ -51,4 +51,10 @@ class ContactController extends Controller
 
         return back()->with('success', 'Thank you for contact us!');
     }
+
+    // public function massege(){
+    //     $messages = Contact::all();
+    //     // dd($messages);
+    //     return view('/messages', compact('messages'));
+    // }
 }

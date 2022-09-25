@@ -14,7 +14,13 @@
 }
 
 </style>
-
+ <div class="container" style="margin-top: 20px">
+           @if (Session::has('success'))
+    <div class="alert alert-success text-center" role="alert">
+        {{ Session::get('success') }}
+    </div>
+@endif
+    </div>
  @if($errors->any())
     <div class="alert alert-danger text-center" role="alert">
         {{ $errors->first() }}

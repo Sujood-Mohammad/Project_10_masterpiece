@@ -20,7 +20,23 @@
         }
 
     </style>
-    <img style='width: 100%; height:90vh; position:absolute; ' src="assets/images/bgimage.jpg" alt="">
+      <!--Page Header Start-->
+        <section class="page-header clearfix"
+            style="background-image: url(assets/images/backgrounds/page-header-bg.jpg);">
+            <div class="container">
+                <div class="page-header__inner text-center clearfix">
+                    <ul class="thm-breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li>
+                            Login
+                        </li>
+                    </ul>
+                    <h2>Login</h2>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End-->
+    {{-- <img style='width: 100%; height:90vh; position:absolute; ' src="assets/images/bgimage.jpg" alt=""> --}}
     <section class="Login">
         <div class="container mt-5 ">
             <div class="row justify-content-center">
@@ -83,7 +99,7 @@
                                 </div>
                             </form>
                             <div class="mt-4">
-                                <span>Don't have an account? <a class="ms-1 regster-href" href="signUp.html">Sign up</a>
+                                <span>Don't have an account? <a class="ms-1 regster-href" href="/register">Sign up</a>
                                 </span>
                             </div>
                         </div>

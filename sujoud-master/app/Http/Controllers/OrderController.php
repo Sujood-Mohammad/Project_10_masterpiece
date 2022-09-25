@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -31,7 +32,9 @@ class OrderController extends Controller
                 $sub_total += $value->product->product_price * $value->product_quntity;
                 $total = $sub_total + $shiping_cost;
             }
-            return view('pages.checkout', compact('cart', 'total'));
+            $total_quntity = Cart::where('user_id', auth()->user()->id)->sum('product_quntity');
+
+            return view('pages.checkout', compact('cart', 'total','total_quntity'));
         } else {
             return redirect()->route('login')->withFailure(__('You must login to see this page'));
         }
@@ -44,7 +47,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::all();
+        return view('admin.orders', compact('orders'));
     }
 
     /**
@@ -113,8 +117,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -123,9 +128,17 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'order_status' => 'required',
+        ]);
+
+        $order = Order::find($id);
+        $order->order_status = $request->input('order_status');
+        $order->save();
+        return redirect('admin/orders/create')->with('success', 'Order status updated successfully');
+
     }
 
     /**
@@ -136,6 +149,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect('admin/orders/create')->with('success', 'Order deleted successfully');
     }
 }

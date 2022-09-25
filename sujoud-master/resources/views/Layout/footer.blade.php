@@ -14,15 +14,17 @@
                                             <div class="footer-widget__about-logo">
                                                 <a href="index-main.html"><img src="{{ asset('assets/images/resources/falahW.png')}}" width="115px" height="54" alt=""></a>
                                             </div>
-                                            <p class="footer-widget__about-text">Lorem ipsum dolor sit amet consect etur
-                                                adi pisicing elit sed.</p>
+                                            <p class="footer-widget__about-text">
+                                                We are a team of professionals who are passionate about helping you
+                                                achieve your goals.
+                                              </p>
                                             <div class="footer-widget__about-contact-box">
                                                 <p class="phone"><a href="tel:123456789"><i
-                                                            class="fas fa-phone-square-alt"></i>+92 666 888 0000</a></p>
+                                                            class="fas fa-phone-square-alt"></i>0779672445</a></p>
                                                 <p><a href="mailto:needhelp@company.com"><i
-                                                            class="fa fa-envelope"></i>needhelp@company.com</a></p>
-                                                <p class="text"><i class="fas fa-map-marker-alt"></i>666 road, broklyn
-                                                    street new york</p>
+                                                            class="fa fa-envelope"></i>falahCompany@gmail.com</a></p>
+                                                <p class="text"><i class="fas fa-map-marker-alt"></i>666 road, 30th
+                                                    street irbid</p>
                                             </div>
                                         </div>
                                     </div>
@@ -64,13 +66,13 @@
                                         <div class="footer-widget__column footer-widget__explore">
                                             <h2 class="footer-widget__title">Explore</h2>
                                             <ul class="footer-widget__explore-list">
-                                                <li class="footer-widget__explore-list-item"><a href="projects.html">New
-                                                        Projects</a></li>
-                                                <li class="footer-widget__explore-list-item"><a href="services.html">Our
+                                                <li class="footer-widget__explore-list-item"><a href="/">Home
+                                                </a></li>
+                                                <li class="footer-widget__explore-list-item"><a href="/product">Our
                                                         Services</a></li>
-                                                <li class="footer-widget__explore-list-item"><a href="about.html">About
+                                                <li class="footer-widget__explore-list-item"><a href="/about">About
                                                         Us</a></li>
-                                                <li class="footer-widget__explore-list-item"><a href="#">Get in
+                                                <li class="footer-widget__explore-list-item"><a href="/contact">Get in
                                                         Touch</a></li>
                                                 <li class="footer-widget__explore-list-item"><a href="#">Volunteers</a>
                                                 </li>
@@ -112,8 +114,8 @@
                                 <div class="footer-one__bottom-social-links">
                                     <ul>
                                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                        <li><a href="https://www.facebook.com/profile.php?id=100005679796246"><i class="fab fa-facebook"></i></a></li>
+                                        <li><a href="https://www.linkedin.com/in/sujoud-mohammad-57162b234"><i class="fab fa-linkedin"></i></a></li>
                                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                     </ul>
                                 </div>

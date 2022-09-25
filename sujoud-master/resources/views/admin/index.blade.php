@@ -4,7 +4,7 @@ $pageName = 'Admin Dashboard';
 @extends('admin.layouts.admin')
 @section('content')
     <div class="page-heading">
-        <h3>Profile Statistics</h3>
+        <h3 style="color:#334b35" >Profile Statistics</h3>
     </div>
     <div class="page-content">
         <section class="row">
@@ -166,25 +166,34 @@ $pageName = 'Admin Dashboard';
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Product</th>
                                                 <th>Comment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+
+                                                @foreach ($latest_comment as $comment)
+                                                <tr>
                                                 <td class="col-3">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
-                                                            <img src="assets/images/faces/5.jpg">
+                                                           <img src="{{asset('img/'.$comment->user->image)}}">
                                                         </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                                        <p class="font-bold ms-3 mb-0">{{$comment->user->name }}</p>
                                                     </div>
                                                 </td>
                                                 <td class="col-auto">
-                                                    <p class=" mb-0">Congratulations on your
-                                                        graduation!</p>
+                                                    <p class=" mb-0">{{$comment->product->product_name}}</p>
                                                 </td>
-                                            </tr>
-                                            <tr>
+                                                <td class="col-auto">
+                                                    <p class=" mb-0">
+                                                        {{$comment->text}}
+                                                    </p>
+                                                </td>
+                                                 </tr>
+                                                @endforeach
+
+                                            {{-- <tr>
                                                 <td class="col-3">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
@@ -199,7 +208,7 @@ $pageName = 'Admin Dashboard';
                                                         tutorial for
                                                         this design?</p>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,14 +219,14 @@ $pageName = 'Admin Dashboard';
             </div>
             <div class="col-12 col-lg-3">
                 <div class="card">
-                    <div class="card-body py-4 px-5">
+                    <div class=" py-4 ">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                <img src="assets/images/faces/1.jpg" alt="Face 1">
+                                <img src="{{url('img/'.auth()->user()->image) }}" alt="Face 1">
                             </div>
                             <div class="ms-3 name">
-                                <h5 class="font-bold">John Duck</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
+                                <h5 class="font-bold"> {{ Auth::user()->name }}</h5>
+                                <h6 class="text-muted mb-0"> {{ Auth::user()->email }}</h6>
                             </div>
                         </div>
                     </div>
@@ -226,38 +235,24 @@ $pageName = 'Admin Dashboard';
                     <div class="card-header">
                         <h4>Recent Messages</h4>
                     </div>
-                    <div class="card-content pb-4">
+                    @foreach ($messages as $message)
+
+                    <div class="card-content">
                         <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="assets/images/faces/4.jpg">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
+                            {{-- <div class="avatar avatar-lg">
+                                <img src="{{url('img/'.auth()->user()->image) }}">
+                            </div> --}}
+                            <div class="name ms-2">
+                                <h5 class="mb-1">{{$message->name}}</h5>
+                                <h6 class="text-muted mb-0">{{$message->email}}</h6>
                             </div>
                         </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="assets/images/faces/5.jpg">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="assets/images/faces/1.jpg">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
-                        <div class="px-4">
+                    </div>
+                    @endforeach
+
+                    <div class="px-4">
                             <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
                                 Conversation</button>
-                        </div>
                     </div>
                 </div>
                 <div class="card">

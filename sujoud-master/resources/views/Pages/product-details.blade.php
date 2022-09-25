@@ -21,7 +21,18 @@
     <section class="product-details">
         <div class="container">
             <div class="row">
-
+                <div class="container" style="margin-top: 20px">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success text-center" role="alert">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+                </div>
+               @if (Session::has('fail'))
+    <div class="alert alert-danger text-center" role="alert">
+        {{ Session::get('fail') }}
+    </div>
+@endif
                 <div class="col-lg-6">
                     <div class="product-details__image">
                         <img src="{{ asset('img/' . $products->product_image) }}" width="490px" height="550px"
@@ -103,35 +114,17 @@
     </section><!-- /.product-content -->
 
     <section class="product-review">
-        <div class="container">
-            <h2 class="product-content__title">2 Reviews</h2><!-- /.product-content__title -->
-            <div class="product-review__item">
-                <div class="product-review__item__image">
-                    <img src="assets/images/update-14-09-2021/shop/shop-review-1-1.png" alt="">
-                </div><!-- /.product-review__item__image -->
-                <div class="product-review__item__content">
-                    <div class="product-review__item__star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div><!-- /.product-review__item__star -->
-                    <h3 class="product-review__item__title">Mike Hardson</h3>
-                    <div class="product-review__item__meta">
-                        20 Sep, 2021 <span>.</span> 4:00 pm
-                    </div><!-- /.product-review__item__meta -->
-                    <p class="product-review__item__text">Aliquam et facilisis arcuut olestie augue. Suspendisse
-                        sodales tortor nunc quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit
-                        in voluptate velit esse cill doloreeu fugiat nulla pariatur excepteur sint. Vivaus sed delly
-                        molestie sapien. Aliquam et facilisis arcuut molestie augue. </p>
-                    <!-- /.product-review__item__text -->
-                </div><!-- /.product-review__item__content -->
-            </div><!-- /.product-review__item -->
 
-            <div class="product-review__item">
+
+
+        <div class="container">
+            <h2 class="product-content__title">Reviews</h2><!-- /.product-content__title -->
+
+              @foreach($comments as $comment)
+              @if ($comment->status == '1')
+                  <div class="product-review__item">
                 <div class="product-review__item__image">
-                    <img src="assets/images/update-14-09-2021/shop/shop-review-1-2.png" alt="">
+                    <img src="{{url('img/'. $comment->user->image ) }}" style="width: 150px; height: 150px" alt="">
                 </div><!-- /.product-review__item__image -->
                 <div class="product-review__item__content">
                     <div class="product-review__item__star">
@@ -141,58 +134,68 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div><!-- /.product-review__item__star -->
-                    <h3 class="product-review__item__title">Sarah Rose</h3>
+                    <h3 class="product-review__item__title">{{$comment->user->name}}</h3>
                     <div class="product-review__item__meta">
-                        20 Sep, 2021 <span>.</span> 4:00 pm
+                      {{$comment->created_at}}
                     </div><!-- /.product-review__item__meta -->
-                    <p class="product-review__item__text">Aliquam et facilisis arcuut olestie augue. Suspendisse
-                        sodales tortor nunc quis auctor ligula posuere cursus duis aute irure dolor in reprehenderit
-                        in voluptate velit esse cill doloreeu fugiat nulla pariatur excepteur sint. Vivaus sed delly
-                        molestie sapien. Aliquam et facilisis arcuut molestie augue. </p>
+                    <p class="product-review__item__text">
+                        {{$comment->text}}
+                    </p>
                     <!-- /.product-review__item__text -->
                 </div><!-- /.product-review__item__content -->
+
             </div><!-- /.product-review__item -->
+            @endif
+               @endforeach
         </div><!-- /.container -->
+
+
+
     </section><!-- /.product-review -->
 
     <section class="product-form">
+
+        @if ( Auth::check())
+
         <div class="container">
             <h2 class="product-content__title">Add a Review</h2><!-- /.product-content__title -->
-            <p class="product-form__rating">
+            {{-- <p class="product-form__rating">
                 Rate this Product?
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
-            </p>
-            <form action="https://layerdrops.com/agriox/assets/inc/sendemail.php"
-                class="comment-one__form contact-form-validated">
+            </p> --}}
+            {{-- <form action="https://layerdrops.com/agriox/assets/inc/sendemail.php"
+                class="comment-one__form contact-form-validated"> --}}
+            <form method="POST" action="{{ route('comment.store') }}">
+                @csrf
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="comment-form__input-box">
-                            <textarea name="message" placeholder="Write message"></textarea>
+                            <textarea name="text" placeholder="Write message"></textarea>
+                            <input type="hidden" name="product_id" value={{ $products->id }}>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="comment-form__input-box">
-                            <input type="text" placeholder="Your name" name="name">
+                            <input type="text" placeholder="Your name" value="{{ Auth::user()->name }}">
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="comment-form__input-box">
-                            <input type="email" placeholder="Email address" name="email">
+                            <input type="text" placeholder="Email address" value="{{ Auth::user()->email }}">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
-
-                        <button type="submit" class="thm-btn comment-form__btn">Submit
-                            comment</button>
+                        <button type="submit" class="thm-btn">Submit comment</button>
                     </div>
                 </div>
             </form>
         </div><!-- /.container -->
+         @endif
     </section><!-- /.product-form -->
 @endsection

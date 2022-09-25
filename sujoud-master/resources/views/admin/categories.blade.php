@@ -50,14 +50,14 @@ $pageName = 'Manage Categories';
                                     <td>{{ $category->description }}</td>
                                     <td>
                                         <a href="{{ route('admin.categories.show', $category->id) }}"><i
-                                                class="far fa-eye"></i></a>
+                                                class="far fa-eye" style="color:#6b9818"></i></a>
                                         <a href="{{ route('admin.categories.edit', $category->id) }}" class="ms-3 "><i
-                                                class="fas fa-user-edit"></i></a>
+                                                class="fas fa-user-edit" style="color:#6b9818"></i></a>
                                         <form style="display: inline-block" method="POST"
                                             action="{{ route('admin.categories.destroy', $category->id) }}">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn text-primary"><i class="far fa-trash-alt"></i></button>
+                                            <button class="btn text-primary"><i class="far fa-trash-alt" style="color:#6b9818"></i></button>
                                         </form>
                                     </td>
                                 </tr>

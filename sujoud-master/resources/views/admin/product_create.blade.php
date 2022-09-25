@@ -56,13 +56,33 @@ $pageName = 'Manage Exams';
                                         <label for="email-id-icon">Product Price</label>
                                         <div class="position-relative">
                                             <input type="text" name="product_price" class="form-control"
-                                                placeholder="Descreption" id="email-id-icon">
+                                                placeholder="price" id="email-id-icon">
                                             <div class="form-control-icon">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </div>
                                         </div>
                                     </div>
                                  </div>
+
+                                 <div class="col-12 col-md-6">
+                                    <div class="form-group has-icon-left">
+                                        <label for="email-id-icon">Category Name</label>
+                                        <div class="position-relative">
+                                            <select name="category_id" class="form-control">
+                                                <option value="">Select Category</option>
+                                                @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="form-control-icon">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    </div>
+
+
 
                                 <div class="col-12 col-md-6">
                                     <div class="form-group has-icon-left">
